@@ -1,1 +1,1 @@
-# calculator
+This is a calculator project as part of the Odin Project curriculum. I will use javaScript, HTML and CSS  to complete the project. more details will be added as i go along.
