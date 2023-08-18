@@ -1,10 +1,27 @@
-const Add = (num1, num2) => (num1 + num2);
-const Subtract = (num1, num2) => (num1 - num2);
-const Multiply = (num1, num2) => (num1 * num2);
-const Divide = (num1, num2) => (num1 / num2);
+const add = (num1, num2) => (num1 + num2);
+const subtract = (num1, num2) => (num1 - num2);
+const multiply = (num1, num2) => (num1 * num2);
+const divide = (num1, num2) => (num1 / num2);
 
+let firstNumber;
+let operator;
+let secondNumber;
 
-console.log(Add(1, 2));
-console.log(Subtract(1, 2));
-console.log(Multiply(1, 2));
-console.log(Divide(1, 2));
+const operate = (firstNumber, secondNumber, operator) => {
+    if (operator === "+") {
+        return add(firstNumber, secondNumber);
+    }
+    else if(operator === "-") {
+        return subtract(firstNumber, secondNumber)
+    }
+    else if(operator === "*") {
+        return multiply(firstNumber, secondNumber)
+    }
+    else if(operator === "/") {
+        return divide(firstNumber, secondNumber)
+    }
+}
+
+const calculator = document.querySelector(".calculator");
+const display =  document.querySelector(".display");
+const container = document.querySelector(".container");

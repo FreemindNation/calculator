@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f6027feb4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="calculator.js"  defer></script>
 </head>
 <body>
-    
+    <h1>Calculator</h1>
+    <div class="calculator">
+        <div class="display">012343</div>
+        <div class="container">
+            <div class="box key-clear">C</div>
+            <div class="box key-clear">DEL</div>
+            <div class="box key-operator">%</div>
+            <div class="box key-operator" data-action="divide"><i class="fas fa-divide" style="color: aliceblue; font-size: 32px;"></i></div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+            <div class="box">9</div>
+            <div class="box key-operator" data-action="multiply"><i class="fas fa-times" style="color: aliceblue; font-size: 32px;"></i></div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box key-operator" data-action="subtract"><i class="fas fa-minus" style="color: aliceblue; font-size: 32px;"></i></div>
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box key-operator" data-action="add"><i class="fas fa-plus" style="color: aliceblue; font-size: 32px;"></i></div>
+            <div class="box">0</div>
+            <div class="box">.</div>
+            <div class="box">+/-</div>
+            <div class="box key-equals"><i class="fas fa-equals" style="color: aliceblue; font-size: 32px;"></i></div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2023 FreemindNation <i class="fa fa-github" style="font-size: 36px;"></i> </footer>
 </body>
 </html>
