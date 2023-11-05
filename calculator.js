@@ -27,7 +27,7 @@ const display =  document.querySelector(".display");
 const container = document.querySelector(".container");
 const digits = document.querySelectorAll(".digit");
 const clear = document.querySelector("#clear");
-const deleteDigit = document.querySelector("#delete-digit");
+const backSpace = document.querySelector("#back-space");
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
@@ -45,7 +45,16 @@ digits.forEach(digit => digit.addEventListener("click", () => {
 
 clear.addEventListener("click" ,()=> display.textContent = 0);
 
-deleteDigit.addEventListener("click", ()=> displayValue(digits.id))
+backSpace.addEventListener("click", ()=> {
+    if(display.textContent === 0 || display.textContent === ""){
+        display.textContent = 0;
+    }
+    else {
+    display.textContent = display.textContent.slice(0, display.textContent.length -1)
+    }
+});
+
+
 
 
 
