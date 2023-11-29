@@ -24,11 +24,14 @@ const operate = (firstNumber, secondNumber, operator) => {
 
 const calculator = document.querySelector(".calculator");
 const display =  document.querySelector(".display");
+const miniDisplay = document.querySelector(".mini-display");
 const container = document.querySelector(".container");
 const digits = document.querySelectorAll(".digit");
 const clear = document.querySelector("#clear");
 const backSpace = document.querySelector("#back-space");
 const decimal = document.querySelector("#decimal");
+const opposite = document.querySelector("#opposite");
+const operators = document.querySelectorAll(".operator");
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
@@ -57,13 +60,16 @@ backSpace.addEventListener("click", ()=> {
 
 let decimalAllowed = false;
 
-
 decimal.addEventListener("click", ()=> {
     if(display.textContent.indexOf(".") === -1) {
         display.textContent += ".";
         // decimalAllowed = true;
     }
-    })
+    });
+
+opposite.addEventListener("click", ()=> {
+    display.textContent = display.textContent * -1;
+})
 
 
 
