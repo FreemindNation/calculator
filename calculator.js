@@ -28,11 +28,12 @@ const container = document.querySelector(".container");
 const digits = document.querySelectorAll(".digit");
 const clear = document.querySelector("#clear");
 const backSpace = document.querySelector("#back-space");
+const decimal = document.querySelector("#decimal");
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
     if (inputNumber.length < 10) {
-        display.textContent = parseInt(inputNumber + number).toString();
+        display.textContent = parseFloat(inputNumber + number).toString();
     }
         
 }
@@ -46,7 +47,7 @@ digits.forEach(digit => digit.addEventListener("click", () => {
 clear.addEventListener("click" ,()=> display.textContent = 0);
 
 backSpace.addEventListener("click", ()=> {
-    if(display.textContent === 0 || display.textContent === ""){
+    if(display.textContent.length === 1){
         display.textContent = 0;
     }
     else {
@@ -54,7 +55,15 @@ backSpace.addEventListener("click", ()=> {
     }
 });
 
+let decimalAllowed = false;
 
+
+decimal.addEventListener("click", ()=> {
+    if(display.textContent.indexOf(".") === -1) {
+        display.textContent += ".";
+        // decimalAllowed = true;
+    }
+    })
 
 
 
