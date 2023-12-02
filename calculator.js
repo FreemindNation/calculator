@@ -2,6 +2,7 @@ const add = (num1, num2) => (num1 + num2);
 const subtract = (num1, num2) => (num1 - num2);
 const multiply = (num1, num2) => (num1 * num2);
 const divide = (num1, num2) => (num1 / num2);
+const modulo = (num1, num2) => (num1 % num2);
 
 let firstNumber;
 let operator;
@@ -19,6 +20,9 @@ const operate = (firstNumber, secondNumber, operator) => {
     }
     else if(operator === "/") {
         return divide(firstNumber, secondNumber)
+    }
+    else if(operator === "%") {
+        return modulo(firstNumber, secondNumber)
     }
 }
 
@@ -71,6 +75,9 @@ opposite.addEventListener("click", ()=> {
     display.textContent = display.textContent * -1;
 })
 
+operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
+
+}))
 
 
 // const nine = document.querySelector("#9");

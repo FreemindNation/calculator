@@ -34,6 +34,7 @@ body {
 
 .box {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 32px;
@@ -74,12 +75,14 @@ body {
     color: azure;
 }
 
-.key-operator {
-    background-color: rgb(120, 124, 124);;
+.operator {
+    background-color: rgb(24, 23, 23);;
 }
 
-.key-equals {
+.equals {
     background-color: rgb(226, 91, 41);
+    height: 10.4%;
+    /* flex: auto; */
 }
 
 .key-clear {
