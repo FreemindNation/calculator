@@ -8,21 +8,28 @@ let firstNumber;
 let operator;
 let secondNumber;
 
-const operate = (firstNumber, secondNumber, operator) => {
+const operate = (firstNum, secondNum, operator) => {
+    firstNumber = parseFloat(firstNum);
+    secondNumber = parseFloat(secondNum);
     if (operator === "+") {
-        return add(firstNumber, secondNumber);
+        let answer = add(firstNumber, secondNumber);
+        display.textContent = answer;
     }
     else if(operator === "-") {
-        return subtract(firstNumber, secondNumber)
+        answer = subtract(firstNumber, secondNumber);
+        display.textContent = answer;
     }
     else if(operator === "*") {
-        return multiply(firstNumber, secondNumber)
+        answer = multiply(firstNumber, secondNumber);
+        display.textContent = answer;
     }
     else if(operator === "/") {
-        return divide(firstNumber, secondNumber)
+        answer = divide(firstNumber, secondNumber);
+        display.textContent = answer;
     }
     else if(operator === "%") {
-        return modulo(firstNumber, secondNumber)
+        answer = modulo(firstNumber, secondNumber);
+        display.textContent = answer;
     }
 }
 
@@ -39,10 +46,10 @@ const operators = document.querySelectorAll(".operator");
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
-    if (inputNumber.length < 10) {
+    if (inputNumber.length < 12) {
         display.textContent = parseFloat(inputNumber + number).toString();
+
     }
-        
 }
 
 digits.forEach(digit => digit.addEventListener("click", () => {
@@ -50,33 +57,41 @@ digits.forEach(digit => digit.addEventListener("click", () => {
     displayValue(digit.id);
 })
 );
-
-clear.addEventListener("click" ,()=> display.textContent = 0);
-
-backSpace.addEventListener("click", ()=> {
+const clearDisplay =() => {
+    display.textContent = 0;
+}
+const removeDigit = () => {
     if(display.textContent.length === 1){
         display.textContent = 0;
     }
     else {
     display.textContent = display.textContent.slice(0, display.textContent.length -1)
     }
-});
+}
+const addDecimal = () => {
+     if(display.textContent.indexOf(".") === -1) {
+        display.textContent += "."; 
+    }
+}
+const reverseNumber = () => {
+    display.textContent = display.textContent * -1;
+}
+
+clear.addEventListener("click" ,clearDisplay);
+
+backSpace.addEventListener("click", removeDigit);
 
 let decimalAllowed = false;
 
-decimal.addEventListener("click", ()=> {
-    if(display.textContent.indexOf(".") === -1) {
-        display.textContent += ".";
-        // decimalAllowed = true;
-    }
-    });
+decimal.addEventListener("click", addDecimal);
 
-opposite.addEventListener("click", ()=> {
-    display.textContent = display.textContent * -1;
-})
+opposite.addEventListener("click", reverseNumber);
+
+const setOperator = (operator) =>
 
 operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
-
+    miniDisplay.textContent = 0;
+    
 }))
 
 
