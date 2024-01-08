@@ -59,6 +59,7 @@ digits.forEach(digit => digit.addEventListener("click", () => {
 );
 const clearDisplay =() => {
     display.textContent = 0;
+    miniDisplay.textContent ="";
 }
 const removeDigit = () => {
     if(display.textContent.length === 1){
@@ -87,11 +88,11 @@ decimal.addEventListener("click", addDecimal);
 
 opposite.addEventListener("click", reverseNumber);
 
-const setOperator = (operator) =>
+
 
 operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
-    miniDisplay.textContent = 0;
-    
+    miniDisplay.textContent = display.textContent + currOpp.value;
+    console.log(currOpp.id);
 }))
 
 
