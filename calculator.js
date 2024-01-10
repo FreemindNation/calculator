@@ -4,32 +4,33 @@ const multiply = (num1, num2) => (num1 * num2);
 const divide = (num1, num2) => (num1 / num2);
 const modulo = (num1, num2) => (num1 % num2);
 
-let firstNumber;
-let operator;
-let secondNumber;
+let firstNumber = "";
+let operator = "";
+let secondNumber = "";
+let total = 0;
 
 const operate = (firstNum, secondNum, operator) => {
-    firstNumber = parseFloat(firstNum);
-    secondNumber = parseFloat(secondNum);
-    if (operator === "+") {
-        let answer = add(firstNumber, secondNumber);
-        display.textContent = answer;
+    // firstNumber = parseFloat(firstNum);
+    // secondNumber = parseFloat(secondNum);
+    if (operator === "add") {
+         total = add(parseInt(firstNum), parseInt(secondNum));
+        display.textContent = total;
     }
-    else if(operator === "-") {
-        answer = subtract(firstNumber, secondNumber);
-        display.textContent = answer;
+    else if(operator === "subtract") {
+        total = subtract(parseInt(firstNum), parseInt(secondNum));
+        display.textContent = total;
     }
-    else if(operator === "*") {
-        answer = multiply(firstNumber, secondNumber);
-        display.textContent = answer;
+    else if(operator === "multiply") {
+        total = multiply(parseInt(firstNum), parseInt(secondNum));
+        display.textContent = total;
     }
-    else if(operator === "/") {
-        answer = divide(firstNumber, secondNumber);
-        display.textContent = answer;
+    else if(operator === "divide") {
+        total = divide(parseInt(firstNum), parseInt(secondNum));
+        display.textContent = total;
     }
-    else if(operator === "%") {
-        answer = modulo(firstNumber, secondNumber);
-        display.textContent = answer;
+    else if(operator === "modulo") {
+        total = modulo(parseInt(firstNum), parseInt(secondNum));
+        display.textContent = total;
     }
 }
 
@@ -43,6 +44,7 @@ const backSpace = document.querySelector("#back-space");
 const decimal = document.querySelector("#decimal");
 const opposite = document.querySelector("#opposite");
 const operators = document.querySelectorAll(".operator");
+const equals = document.querySelector(".equals");
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
@@ -57,7 +59,7 @@ digits.forEach(digit => digit.addEventListener("click", () => {
     displayValue(digit.id);
 })
 );
-const clearDisplay =() => {
+const clearDisplay =() => { 
     display.textContent = 0;
     miniDisplay.textContent ="";
 }
@@ -89,11 +91,30 @@ decimal.addEventListener("click", addDecimal);
 opposite.addEventListener("click", reverseNumber);
 
 
+// multiplyOpp.addEventListener("click", () => {
+//     miniDisplay.textContent = display.textContent + " " + multiplyOpp.value;
+    
+// })
 
-operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
-    miniDisplay.textContent = display.textContent + currOpp.value;
-    console.log(currOpp.id);
+
+operators.forEach(currOpp => currOpp.addEventListener("click", (event)=> {
+    operator =currOpp.dataset.action;
+    console.log(operator);
+    firstNumber = display.textContent;
+    display.textContent = "";
+
+    if(operator !== "" && display.textContent !== "") {
+        secondNumber = display.textContent;
+    }
+
+    equals.addEventListener("click", () => {
+        operate(firstNumber, secondNumber, operator);
+        console.log(operator);
+    })
 }))
+
+
+
 
 
 // const nine = document.querySelector("#9");
