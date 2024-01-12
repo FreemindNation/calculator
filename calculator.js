@@ -13,23 +13,23 @@ const operate = (firstNum, secondNum, operator) => {
     // firstNumber = parseFloat(firstNum);
     // secondNumber = parseFloat(secondNum);
     if (operator === "add") {
-         total = add(parseInt(firstNum), parseInt(secondNum));
+         total = add(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = total;
     }
     else if(operator === "subtract") {
-        total = subtract(parseInt(firstNum), parseInt(secondNum));
+        total = subtract(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = total;
     }
     else if(operator === "multiply") {
-        total = multiply(parseInt(firstNum), parseInt(secondNum));
+        total = multiply(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = total;
     }
     else if(operator === "divide") {
-        total = divide(parseInt(firstNum), parseInt(secondNum));
+        total = divide(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = total;
     }
     else if(operator === "modulo") {
-        total = modulo(parseInt(firstNum), parseInt(secondNum));
+        total = modulo(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = total;
     }
 }
@@ -62,6 +62,9 @@ digits.forEach(digit => digit.addEventListener("click", () => {
 const clearDisplay =() => { 
     display.textContent = 0;
     miniDisplay.textContent ="";
+    operator = "";
+    firstNumber = "";
+    secondNumber = "";
 }
 const removeDigit = () => {
     if(display.textContent.length === 1){
@@ -99,21 +102,24 @@ opposite.addEventListener("click", reverseNumber);
 
 operators.forEach(currOpp => currOpp.addEventListener("click", (event)=> {
     operator =currOpp.dataset.action;
+
     console.log(operator);
     firstNumber = display.textContent;
     display.textContent = "";
+    console.log(firstNumber);
 
-    if(operator !== "" && display.textContent !== "") {
-        secondNumber = display.textContent;
-    }
-
-    equals.addEventListener("click", () => {
-        operate(firstNumber, secondNumber, operator);
-        console.log(operator);
-    })
 }))
 
+equals.addEventListener("click", () => {
+    if(operator !== "") {
+        secondNumber = display.textContent;
+        operate(firstNumber, secondNumber, operator);
+    }
+    
 
+    console.log(operator);
+    console.log(firstNumber, secondNumber);
+})
 
 
 
