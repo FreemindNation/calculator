@@ -100,11 +100,13 @@ opposite.addEventListener("click", reverseNumber);
 // })
 
 
-operators.forEach(currOpp => currOpp.addEventListener("click", (event)=> {
+operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
     operator =currOpp.dataset.action;
-
-    console.log(operator);
+    let opSymbol = currOpp.id;
+    console.log(operator, opSymbol);
     firstNumber = display.textContent;
+    // miniDisplayValue += firstNumber, operator;
+    miniDisplay.textContent += firstNumber + " " + opSymbol;
     display.textContent = "";
     console.log(firstNumber);
 
@@ -114,6 +116,8 @@ equals.addEventListener("click", () => {
     if(operator !== "") {
         secondNumber = display.textContent;
         operate(firstNumber, secondNumber, operator);
+        display.style.fontSize = "2em";
+        miniDisplay.textContent = " " + secondNumber + " " + "=" + " " + display.textContent;
     }
     
 
