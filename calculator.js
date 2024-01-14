@@ -6,6 +6,7 @@ const modulo = (num1, num2) => (num1 % num2);
 
 let firstNumber = "";
 let operator = "";
+let opSymbol = "";
 let secondNumber = "";
 let total = 0;
 
@@ -100,7 +101,7 @@ opposite.addEventListener("click", reverseNumber);
 // })
 
 
-operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
+operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
     operator =currOpp.dataset.action;
     let opSymbol = currOpp.id;
     console.log(operator, opSymbol);
@@ -110,15 +111,36 @@ operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
     display.textContent = "";
     console.log(firstNumber);
 
+    
+
 }))
 
-equals.addEventListener("click", () => {
+equals.addEventListener("click", (e) => {
     if(operator !== "") {
         secondNumber = display.textContent;
         operate(firstNumber, secondNumber, operator);
         display.style.fontSize = "2em";
-        miniDisplay.textContent = " " + secondNumber + " " + "=" + " " + display.textContent;
+
+        if(miniDisplay.textContent.indexOf("=") === -1) {
+        miniDisplay.textContent += " " + secondNumber + " " + "=" + " ";
+        }
+        else {
+            operators.forEach(currOpp => currOpp.addEventListener("click", (e) => {
+                firstNumber = display.textContent;
+                opSymbol = currOpp.id;
+                miniDisplay.textContent = firstNumber + " " + opSymbol + " " + secondNumber + " " + "=";
+            }))            
+        
+            
+            
+            
+            console.log(operator,opSymbol);
+        }
     }
+    
+
+    
+    
     
 
     console.log(operator);
