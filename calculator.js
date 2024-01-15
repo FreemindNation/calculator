@@ -6,7 +6,6 @@ const modulo = (num1, num2) => (num1 % num2);
 
 let firstNumber = "";
 let operator = "";
-let opSymbol = "";
 let secondNumber = "";
 let total = 0;
 
@@ -106,41 +105,20 @@ operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
     let opSymbol = currOpp.id;
     console.log(operator, opSymbol);
     firstNumber = display.textContent;
-    // miniDisplayValue += firstNumber, operator;
     miniDisplay.textContent += firstNumber + " " + opSymbol;
     display.textContent = "";
     console.log(firstNumber);
 
-    
-
 }))
 
-equals.addEventListener("click", (e) => {
+equals.addEventListener("click", () => {
     if(operator !== "") {
         secondNumber = display.textContent;
         operate(firstNumber, secondNumber, operator);
         display.style.fontSize = "2em";
-
-        if(miniDisplay.textContent.indexOf("=") === -1) {
-        miniDisplay.textContent += " " + secondNumber + " " + "=" + " ";
-        }
-        else {
-            operators.forEach(currOpp => currOpp.addEventListener("click", (e) => {
-                firstNumber = display.textContent;
-                opSymbol = currOpp.id;
-                miniDisplay.textContent = firstNumber + " " + opSymbol + " " + secondNumber + " " + "=";
-            }))            
-        
-            
-            
-            
-            console.log(operator,opSymbol);
-        }
     }
     
-
-    
-    
+    miniDisplay.textContent += " " + secondNumber + " " + "=" + " ";
     
 
     console.log(operator);
