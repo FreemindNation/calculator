@@ -46,18 +46,25 @@ const opposite = document.querySelector("#opposite");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 
+let opValues = "";
+let operatorsArr = ["+", "-", "*","/","%"];
+
 const displayValue = (number) => {
     const inputNumber = display.textContent;
-    if (inputNumber.length < 12) {
+    if (inputNumber.length < 16) {
         display.textContent = parseFloat(inputNumber + number).toString();
-
     }
 }
-
+if (display.textContent.length > 12) {
+    display.textContent.style.fontSize = "1em";
+    console.log(display.textContent);
+}
 digits.forEach(digit => digit.addEventListener("click", () => {
 
-    displayValue(digit.id);
-})
+     displayValue(digit.id);
+    // opValues += displayValue(digit.id);
+    console.log(opValues);
+})    
 );
 const clearDisplay =() => { 
     display.textContent = 0;
@@ -100,14 +107,17 @@ opposite.addEventListener("click", reverseNumber);
 // })
 
 
+
+
 operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
     operator =currOpp.dataset.action;
     let opSymbol = currOpp.id;
     console.log(operator, opSymbol);
     firstNumber = display.textContent;
-    miniDisplay.textContent += firstNumber + " " + opSymbol;
+    miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
     display.textContent = "";
     console.log(firstNumber);
+
 
 }))
 
