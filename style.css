@@ -26,7 +26,6 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    /* gap:6em; */
     height: 6em;
     width: 100%;
     gap: 1px;
