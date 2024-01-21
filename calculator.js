@@ -62,7 +62,7 @@ if (display.textContent.length > 12) {
 digits.forEach(digit => digit.addEventListener("click", () => {
 
      displayValue(digit.id);
-    // opValues += displayValue(digit.id);
+    opValues += digit.id;
     console.log(opValues);
 })    
 );
@@ -112,7 +112,9 @@ opposite.addEventListener("click", reverseNumber);
 operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
     operator =currOpp.dataset.action;
     let opSymbol = currOpp.id;
-    console.log(operator, opSymbol);
+    opValues += currOpp.id;
+    chainOp();
+    console.log(operator, opSymbol, opValues);
     firstNumber = display.textContent;
     miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
     display.textContent = "";
@@ -121,6 +123,16 @@ operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
 
 }))
 
+let regex = /\d+\.\d+|\d+|[^0-9]/g;
+let opValuesArr = opValues.match(regex);
+console.log(opValuesArr);
+ const chainOp = ()=> {
+    for (let i = 0; i < opValuesArr.length; i++) {
+        if(operatorsArr.includes(opValuesArr[i])) {
+            operate(opValuesArr[i - 1], opValuesArr[i + 1], opValuesArr[i]);
+        }
+    }
+ }
 equals.addEventListener("click", () => {
     if(operator !== "") {
         secondNumber = display.textContent;
