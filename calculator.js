@@ -46,7 +46,7 @@ const opposite = document.querySelector("#opposite");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 
-let opValues = "";
+let storedValue = "";
 let operatorsArr = ["+", "-", "*","/","%"];
 
 const displayValue = (number) => {
@@ -55,15 +55,18 @@ const displayValue = (number) => {
         display.textContent = parseFloat(inputNumber + number).toString();
     }
 }
-if (display.textContent.length > 12) {
-    display.textContent.style.fontSize = "1em";
-    console.log(display.textContent);
-}
+// if (display.textContent.length > 12) {
+//     display.textContent.style.fontSize = "1em";
+//     console.log(display.textContent);
+// }
 digits.forEach(digit => digit.addEventListener("click", () => {
 
-     displayValue(digit.id);
-    opValues += digit.id;
-    console.log(opValues);
+    displayValue(digit.id);
+    if(operator === "") {
+        storedValue += digit.id;
+    }
+    
+    console.log(storedValue);
 })    
 );
 const clearDisplay =() => { 
@@ -72,6 +75,7 @@ const clearDisplay =() => {
     operator = "";
     firstNumber = "";
     secondNumber = "";
+    storedValue = "";
 }
 const removeDigit = () => {
     if(display.textContent.length === 1){
@@ -108,31 +112,41 @@ opposite.addEventListener("click", reverseNumber);
 
 
 
-
-operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
-    operator =currOpp.dataset.action;
+// let storedValuesArr = [];
+operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
+    operator = currOpp.dataset.action;
     let opSymbol = currOpp.id;
-    opValues += currOpp.id;
-    chainOp();
-    console.log(operator, opSymbol, opValues);
-    firstNumber = display.textContent;
+    // storedValues += currOpp.id;
+    // let regex = /\d+\.\d+|\d+|[^0-9]/g;
+    // let storedValuesStr = storedValues.match(regex);
+    // let storedValuesArr = storedValuesStr.split(" ");   
+    // chainOp();
+    console.log(operator, opSymbol, storedValue);
+    firstNumber = storedValue;
     miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
     display.textContent = "";
+    if(storedValue !== "" && operator !== "" && display.textContent !== "") {
+        secondNumber = display.textContent;
+        
+        display.textContent = operate(firstNumber, secondNumber, operator);
+    }
     console.log(firstNumber);
 
 
 }))
 
-let regex = /\d+\.\d+|\d+|[^0-9]/g;
-let opValuesArr = opValues.match(regex);
-console.log(opValuesArr);
- const chainOp = ()=> {
-    for (let i = 0; i < opValuesArr.length; i++) {
-        if(operatorsArr.includes(opValuesArr[i])) {
-            operate(opValuesArr[i - 1], opValuesArr[i + 1], opValuesArr[i]);
-        }
-    }
- }
+
+// console.log(storedValuesArr);
+//  const chainOp = ()=> {
+//     for (let i = 0; i < storedValuesArr.length; i++) {
+//         if(operatorsArr.includes(storedValuesArr[i])) {
+//             operator = storedValuesArr[i];
+//             firstNumber = storedValuesArr[i - 1];
+//             secondNumber = storedValuesArr[i + 1];
+//             operate(firstNumber, secondNumber, operator);
+//         }
+//     }
+//  }
 equals.addEventListener("click", () => {
     if(operator !== "") {
         secondNumber = display.textContent;
