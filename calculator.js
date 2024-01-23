@@ -64,9 +64,10 @@ digits.forEach(digit => digit.addEventListener("click", () => {
     displayValue(digit.id);
     if(operator === "") {
         storedValue += digit.id;
+        firstNumber = storedValue;
     }
     
-    console.log(storedValue);
+    // console.log(storedValue);
 })    
 );
 const clearDisplay =() => { 
@@ -121,14 +122,17 @@ operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
     // let storedValuesStr = storedValues.match(regex);
     // let storedValuesArr = storedValuesStr.split(" ");   
     // chainOp();
-    console.log(operator, opSymbol, storedValue);
+    console.log(storedValue);
     firstNumber = storedValue;
     miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
     display.textContent = "";
+    operate(firstNumber, secondNumber, operator);
+
+    // console.log(secondNumber);
     if(storedValue !== "" && operator !== "" && display.textContent !== "") {
         secondNumber = display.textContent;
-        
-        display.textContent = operate(firstNumber, secondNumber, operator);
+        console.log(secondNumber);
+        display.textContent = operate(firstNumber, display.textContent, operator);
     }
     console.log(firstNumber);
 
