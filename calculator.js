@@ -14,23 +14,23 @@ const operate = (firstNum, secondNum, operator) => {
     // secondNumber = parseFloat(secondNum);
     if (operator === "add") {
          total = add(parseFloat(firstNum), parseFloat(secondNum));
-        display.textContent = total;
+        display.textContent = parseFloat(total.toFixed(6));
     }
     else if(operator === "subtract") {
         total = subtract(parseFloat(firstNum), parseFloat(secondNum));
-        display.textContent = total;
+        display.textContent = parseFloat(total.toFixed(6));
     }
     else if(operator === "multiply") {
         total = multiply(parseFloat(firstNum), parseFloat(secondNum));
-        display.textContent = total;
+        display.textContent = parseFloat(total.toFixed(6));
     }
     else if(operator === "divide") {
         total = divide(parseFloat(firstNum), parseFloat(secondNum));
-        display.textContent = total;
+        display.textContent = parseFloat(total.toFixed(6));
     }
     else if(operator === "modulo") {
         total = modulo(parseFloat(firstNum), parseFloat(secondNum));
-        display.textContent = total;
+        display.textContent = parseFloat(total.toFixed(6));
     }
 }
 
@@ -63,11 +63,19 @@ digits.forEach(digit => digit.addEventListener("click", () => {
 
     displayValue(digit.id);
     if(operator === "") {
-        storedValue += digit.id;
+        storedValue = display.textContent;
         firstNumber = storedValue;
+        console.log(firstNumber);
     }
     
-    // console.log(storedValue);
+    else if(operator !== "") {
+        
+        storedValue = display.textContent;
+        secondNumber = storedValue;
+
+    }
+    
+    console.log(firstNumber, secondNumber);
 })    
 );
 const clearDisplay =() => { 
@@ -114,27 +122,38 @@ opposite.addEventListener("click", reverseNumber);
 
 
 // let storedValuesArr = [];
-operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
+let clickedOperator = "";
+operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
     operator = currOpp.dataset.action;
     let opSymbol = currOpp.id;
+    display.textContent = "";
+    console.log(e);
+    if(operator === "") {
+        miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
+    }
+    else {
+        operate(firstNumber, secondNumber, operator)
+    }
+     
+    if(display.textContent !== "" || isNaN(display.textContent)) {
+        secondNumber = display.textContent;
+        console.log(secondNumber);
+         operate(firstNumber, secondNumber, operator);
+    }
     // storedValues += currOpp.id;
     // let regex = /\d+\.\d+|\d+|[^0-9]/g;
     // let storedValuesStr = storedValues.match(regex);
     // let storedValuesArr = storedValuesStr.split(" ");   
     // chainOp();
-    console.log(storedValue);
-    firstNumber = storedValue;
-    miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
-    display.textContent = "";
-    operate(firstNumber, secondNumber, operator);
+    // console.log(storedValue);
+    // secondNumber = display.textContent;
+    
+    
+    // operate(firstNumber, secondNumber, operator);
 
     // console.log(secondNumber);
-    if(storedValue !== "" && operator !== "" && display.textContent !== "") {
-        secondNumber = display.textContent;
-        console.log(secondNumber);
-        display.textContent = operate(firstNumber, display.textContent, operator);
-    }
-    console.log(firstNumber);
+    
+    // console.log(firstNumber);
 
 
 }))
@@ -161,8 +180,8 @@ equals.addEventListener("click", () => {
     miniDisplay.textContent += " " + secondNumber + " " + "=" + " ";
     
 
-    console.log(operator);
-    console.log(firstNumber, secondNumber);
+    // console.log(operator);
+    // console.log(firstNumber, secondNumber);
 })
 
 
