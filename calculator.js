@@ -25,8 +25,13 @@ const operate = (firstNum, secondNum, operator) => {
         display.textContent = parseFloat(total.toFixed(6));
     }
     else if(operator === "divide") {
+        if(secondNum === "0") {
+            display.textContent = "Cannot divide by zero!";
+        }
+        else {
         total = divide(parseFloat(firstNum), parseFloat(secondNum));
         display.textContent = parseFloat(total.toFixed(6));
+        }
     }
     else if(operator === "modulo") {
         total = modulo(parseFloat(firstNum), parseFloat(secondNum));
@@ -47,7 +52,7 @@ const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 
 let storedValue = "";
-let operatorsArr = ["+", "-", "*","/","%"];
+// let operatorsArr = ["+", "-", "*","/","%"];
 
 const displayValue = (number) => {
     const inputNumber = display.textContent;
@@ -85,6 +90,9 @@ const clearDisplay =() => {
     firstNumber = "";
     secondNumber = "";
     storedValue = "";
+    currentOperator = "";
+    previousOperator = "";
+    clickedOperatorArr = [];
 }
 const removeDigit = () => {
     if(display.textContent.length === 1){
@@ -100,7 +108,15 @@ const addDecimal = () => {
     }
 }
 const reverseNumber = () => {
-    display.textContent = display.textContent * -1;
+    if(operator === "") {
+        display.textContent = display.textContent * -1;
+        firstNumber = display.textContent;
+    }
+    else {
+        display.textContent = display.textContent * -1;
+        secondNumber = display.textContent;
+    }
+    
 }
 
 clear.addEventListener("click" ,clearDisplay);
@@ -122,24 +138,47 @@ opposite.addEventListener("click", reverseNumber);
 
 
 // let storedValuesArr = [];
-let clickedOperator = "";
-operators.forEach(currOpp => currOpp.addEventListener("click", (e)=> {
-    operator = currOpp.dataset.action;
-    let opSymbol = currOpp.id;
+let clickedOperatorArr = [];
+let currentOperator = "";
+let previousOperator = "";
+operators.forEach(currOpp => currOpp.addEventListener("click", ()=> {
+    // operator = currOpp.dataset.action;
+    operator = currOpp.id;
     display.textContent = "";
-    console.log(e);
-    if(operator === "") {
-        miniDisplay.textContent += firstNumber + " " + opSymbol + " ";
+    clickedOperatorArr += operator;
+
+    if(clickedOperatorArr.length === 1) {
+      miniDisplay.textContent += firstNumber + " " + clickedOperatorArr[0] + " ";
     }
-    else {
-        operate(firstNumber, secondNumber, operator)
+    else if(clickedOperatorArr.length > 1) {
+
+      for(let i= 0; i < clickedOperatorArr.length; i++) {
+        currentOperator = clickedOperatorArr[i];
+        previousOperator = clickedOperatorArr[i - 1];
+
+      }
+        // console.log(secondNumber);
+      operate(firstNumber, secondNumber, previousOperator);
+      firstNumber = display.textContent;
+      miniDisplay.textContent = firstNumber + " " + currentOperator;
+        // clickedOperatorArr.slice(1);
+      display.textContent = "";
+      
+      
+      // removeFirstOperator(clickedOperatorArr);
+      console.log(clickedOperatorArr);  
     }
-     
-    if(display.textContent !== "" || isNaN(display.textContent)) {
-        secondNumber = display.textContent;
-        console.log(secondNumber);
-         operate(firstNumber, secondNumber, operator);
-    }
+    // else if(clickedOperatorArr.length > 2) {
+    //   clickedOperatorArr.slice(1);
+    //     console.log(clickedOperatorArr);
+    // }
+    
+
+    // if(display.textContent !== "" || isNaN(display.textContent)) {
+    //     secondNumber = display.textContent;
+    //     console.log(secondNumber);
+    //      operate(firstNumber, secondNumber, operator);
+    // }
     // storedValues += currOpp.id;
     // let regex = /\d+\.\d+|\d+|[^0-9]/g;
     // let storedValuesStr = storedValues.match(regex);
